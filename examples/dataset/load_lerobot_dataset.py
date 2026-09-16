@@ -75,6 +75,7 @@ def main():
     print(f"Number of frames selected: {dataset.num_frames}")
 
     # Or simply load the entire dataset:
+    # 从hugging face hub下载并加载机器人数据集，类似pytorch的dataset，可以索引访问：dataset[0]是第一帧
     dataset = LeRobotDataset(repo_id)
     print(f"Number of episodes selected: {dataset.num_episodes}")
     print(f"Number of frames selected: {dataset.num_frames}")
@@ -90,6 +91,7 @@ def main():
     # The __getitem__ iterates over the frames of the dataset. Since our datasets are also structured by
     # episodes, you can access the frame indices of any episode using dataset.meta.episodes. Here, we access
     # frame indices associated to the first episode:
+    # episode 0的帧范围:从from_idx到to_idx
     episode_index = 0
     from_idx = dataset.meta.episodes["dataset_from_index"][episode_index]
     to_idx = dataset.meta.episodes["dataset_to_index"][episode_index]
@@ -112,6 +114,7 @@ def main():
     # For many machine learning applications we need to load the history of past observations or trajectories of
     # future actions. Our datasets can load previous and future frames for each key/modality, using timestamps
     # differences with the current loaded frame. For instance:
+    # 加载就的状态或者是未来的轨迹动作
     delta_timestamps = {
         # loads 4 images: 1 second before current frame, 500 ms before, 200 ms before, and current frame
         camera_key: [-1, -0.5, -0.20, 0],
@@ -124,9 +127,9 @@ def main():
     # timestamp, you still get a valid timestamp.
 
     dataset = LeRobotDataset(repo_id, delta_timestamps=delta_timestamps)
-    print(f"\n{dataset[0][camera_key].shape=}")  # (4, c, h, w)
-    print(f"{dataset[0]['observation.state'].shape=}")  # (6, c)
-    print(f"{dataset[0]['action'].shape=}\n")  # (64, c)
+    print(f"\n{dataset[0][camera_key].shape=}")  # (4, c, h, w) 相机图像
+    print(f"{dataset[0]['observation.state'].shape=}")  # (6, c) 机器人状态
+    print(f"{dataset[0]['action'].shape=}\n")  # (64, c) 机器人动作
 
     dataloader = torch.utils.data.DataLoader(
         dataset,

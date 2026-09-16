@@ -1,0 +1,45 @@
+{
+  "dataset": "lerobot/pusht",
+  "total_frames": 25650,
+  "total_episodes": 206,
+  "fps": 10,
+  "episode_length": {
+    "min": 49,
+    "max": 246,
+    "mean": 124.51456310679612,
+    "median": 122.0,
+    "std": 35.58767760931666
+  },
+  "success_rate": {
+    "success_count": 0,
+    "total_count": 206,
+    "rate": 0.0
+  },
+  "timestamp_issues": 0,
+  "data_integrity": {
+    "missing_fields": 0,
+    "nan_values": 0
+  },
+  "value_ranges": {
+    "image": {
+      "min": 0.0941176488995552,
+      "max": 1.0
+    },
+    "state_x": {
+      "min": 30.242645263671875,
+      "max": 447.177734375
+    },
+    "state_y": {
+      "min": 64.08921813964844,
+      "max": 479.1608581542969
+    },
+    "action_x": {
+      "min": 32.0,
+      "max": 450.0
+    },
+    "action_y": {
+      "min": 71.0,
+      "max": 470.0
+    }
+  }
+}
